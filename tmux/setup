@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo Configuring TMUX
+ln -s "$PWD/tmux.conf" "$HOME/.tmux.conf"
+ls -la ~/.tmux.conf
