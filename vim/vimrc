@@ -99,6 +99,7 @@ set ttyfast
 " allow sensing the filetype
 filetype plugin on
 
+" ----- Plug-ins -----
 " Install vim-plug if not already installed
 " (Yes I know about Vim 8 Plugins. They suck.)
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -107,29 +108,49 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-" high contrast for streaming, etc.
-set background=dark
-colorscheme elflord
-
 " only load plugins if Plug detected
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'https://gitlab.com/rwxrob/vim-pandoc-syntax-simple'
   Plug 'cespare/vim-toml'
-  Plug 'fatih/vim-go'
+  "Plug 'fatih/vim-go'
   Plug 'airblade/vim-gitgutter'
   Plug 'PProvost/vim-ps1'
+  Plug 'https://github.com/sainnhe/everforest'
   "Plug 'morhetz/gruvbox'
   call plug#end()
   let g:go_fmt_fail_silently = 0 " let me out even with errors
   let g:go_fmt_command = 'goimports' " autoupdate import
   let g:go_fmt_autosave = 1
-  "set background=dark
-  "colorscheme gruvbox
 else
   autocmd vimleavepre *.go !gofmt -w % " backup if fatih fails
 endif
+
+" ----------- Color and Style ---------
+if has('termguicolors')
+  set termguicolors
+endif
+
+" For dark version.
+" high contrast for streaming, etc.
+set background=dark
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'hard'
+
+" For better performance
+let g:everforest_better_performance = 1
+let g:everforest_enable_italic = 0
+
+colorscheme everforest
+" colorscheme elflord
+" colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
+
+" ----- Duck Markdown linking -----
 
 " fill in empty markdown links with duck.com search
 autocmd vimleavepre *.md !perl -p -i -e 's,\[([^\]]+?)\]\(\),[\1](https://duck.com/lite?kae=t&q=\1),g' %
