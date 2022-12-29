@@ -1,5 +1,4 @@
 " designed for vim 8+
-" (see rwx.gg/vi for help)
 let skip_defaults_vim=1
 set nocompatible
 
@@ -24,7 +23,7 @@ set autoindent
 set listchars=tab:→\ ,eol:↲,nbsp:␣,space:·,trail:·,extends:⟩,precedes:⟨
 
 " enough for line numbers + gutter within 80 
-set textwidth=72 
+set textwidth=80 
 
 " more risky, but cleaner
 set nobackup
@@ -112,33 +111,35 @@ endif
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
   Plug 'https://github.com/sainnhe/everforest'
-  Plug 'universal-ctags/ctags'
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'universal-ctags/ctags'
   Plug 'preservim/tagbar'
-  Plug 'luochen1990/rainbow'
-  Plug 'itchyny/lightline.vim'
   Plug 'airblade/vim-gitgutter'
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'ervandew/supertab'
+  Plug 'luochen1990/rainbow'
+  Plug 'junegunn/fzf'
+  "Plug 'itchyny/lightline.vim'
+  "Plug 'vim-pandoc/vim-pandoc'
+  "Plug 'ervandew/supertab'
   Plug 'tpope/vim-surround'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'rust-lang/rust.vim'
-  Plug 'dense-analysis/ale'
+  "Plug 'sheerun/vim-polyglot'
+  "Plug 'rust-lang/rust.vim'
+  "Plug 'dense-analysis/ale'
   "Plug 'cespare/vim-toml'
   "Plug 'PProvost/vim-ps1'
   "Plug 'fatih/vim-go'
   call plug#end()
-  let g:go_fmt_fail_silently = 0 " let me out even with errors
-  let g:go_fmt_command = 'goimports' " autoupdate import
-  let g:go_fmt_autosave = 1
-else
-  autocmd vimleavepre *.go !gofmt -w % " backup if fatih fails
 endif
 
 " ----------- Color and Style ---------
 if has('termguicolors')
   set termguicolors
 endif
+
+" --- Airline ---
+let g:airline_extensions = []
+let g:airline#extensions#ale#enabled = 1
+let g:airline_theme = 'everforest'
 
 " For dark version.
 " high contrast for streaming, etc.
@@ -152,6 +153,15 @@ let g:everforest_background = 'hard'
 " For better performance
 let g:everforest_better_performance = 1
 let g:everforest_enable_italic = 0
+let g:everforest_disable_italic_comment = 0
+
+let g:everforest_transparent_background = 2
+let g:everforest_spell_foreground = 'colored'
+let g:everforest_ui_contrast = 'high'
+
+let g:everforest_diagnostic_text_highlight = 0
+let g:everforest_diagnostic_line_highlight = 'colored'
+let g:everforest_diagnostic_virtual_text = 0
 
 colorscheme everforest
 " colorscheme elflord
@@ -161,21 +171,26 @@ hi Normal guibg=NONE ctermbg=NONE
 " ----- Super Tab -----
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
+" --- Fuzzy Finder (fzf) ---
+nmap <C-P> :FZF<CR>
+"let $FZF_DEFAULT_COMMAND='find . \( -name __pycache__ -o -name .ipynb_checkpoints) -prune -o print'
+
 " ----- Duck Markdown linking -----
 
 " fill in empty markdown links with duck.com search
-autocmd vimleavepre *.md !perl -p -i -e 's,\[([^\]]+?)\]\(\),[\1](https://duck.com/lite?kae=t&q=\1),g' %
+"autocmd vimleavepre *.md !perl -p -i -e 's,\[([^\]]+?)\]\(\),[\1](https://duck.com/lite?kae=t&q=\1),g' %
 
 " enable omni-completion
 set omnifunc=syntaxcomplete#Complete
 
 " force some file names to be specific file type
 "au bufnewfile,bufRead *.bash* set ft=sh
-au bufnewfile,bufRead *.profile set filetype=sh
-au bufnewfile,bufRead *.crontab set filetype=crontab
-au bufnewfile,bufRead *ssh/config set filetype=sshconfig
+"au bufnewfile,bufRead *.profile set filetype=sh
+"au bufnewfile,bufRead *.crontab set filetype=crontab
+"au bufnewfile,bufRead *ssh/config set filetype=sshconfig
 au bufnewfile,bufRead *gitconfig set filetype=gitconfig
-au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
+"au bufnewfile,bufRead /tmp/psql.edit.* set syntax=sql
+au bufnewFile,bufRead *.md set filetype=markdown
 
 " displays all the syntax rules for current position, useful
 " when writing vimscript syntax plugins
@@ -189,31 +204,15 @@ endfunc
 " start at last place you were editing
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" pane switching vi style (duh)
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
 " functions keys
 map <F1> :set number!<CR> :set relativenumber!<CR>
 nmap <F2> :call <SID>SynStack()<CR>
 set pastetoggle=<F3>
 map <F4> :set list!<CR>
-map <F5> :set cursorline!<CR>
-map <F7> :set spell!<CR>
+map <F5> :set spell!<CR>
+map <F7> :set cursorline!<CR>
 map <F8> :TagbarToggle<CR>
 map <F12> :set fdm=indent<CR>
-
-" disable arrow keys (vi muscle memory)
-noremap <up> :echoerr "Umm, use k instead"<CR>
-noremap <down> :echoerr "Umm, use j instead"<CR>
-noremap <left> :echoerr "Umm, use h instead"<CR>
-noremap <right> :echoerr "Umm, use l instead"<CR>
-inoremap <up> <NOP>
-inoremap <down> <NOP>
-inoremap <left> <NOP>
-inoremap <right> <NOP>
 
 " read personal/private vim configuration (keep last to override)
 set rtp^=~/.vimpersonal

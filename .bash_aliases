@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo Aliases Set!
+# echo Aliases Set!
 
 # some more ls aliases
 alias ll='ls -alF'
