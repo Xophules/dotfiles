@@ -1,6 +1,6 @@
 #!/bin/bash
 
-unalias -a
+# unalias -a
 # echo Aliases Set!
 
 alias dot='cd $DOTFILES'
@@ -9,6 +9,7 @@ alias snippets='cd $SNIPPETS'
 
 alias free='free -h'
 alias df='df -h'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'

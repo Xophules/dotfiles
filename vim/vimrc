@@ -172,8 +172,6 @@ let g:everforest_diagnostic_line_highlight = 'colored'
 let g:everforest_diagnostic_virtual_text = 0
 
 colorscheme everforest
-" colorscheme elflord
-" colorscheme gruvbox
 hi Normal guibg=NONE ctermbg=NONE
 
 " ----- Super Tab -----
