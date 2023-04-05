@@ -11,6 +11,9 @@ set relativenumber
 " turn info in tray on even if default
 set ruler
 
+" Mouse support
+set mouse=a
+
 " tabs are the devil
 set expandtab
 set tabstop=2
@@ -117,6 +120,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'preservim/tagbar'
   Plug 'luochen1990/rainbow'
   Plug 'itchyny/lightline.vim'
+  Plug 'albertomontesg/lightline-asyncrun' " Integration of https://github.com/skywind3000/asyncrun.vim
+  Plug 'sainnhe/artify.vim'
+  Plug 'rmolin88/pomodoro.vim'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'airblade/vim-gitgutter'
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'ervandew/supertab'
@@ -124,7 +131,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'sheerun/vim-polyglot'
   Plug 'rust-lang/rust.vim'
   Plug 'dense-analysis/ale'
-  "Plug 'cespare/vim-toml'
+  Plug 'cespare/vim-toml'
   "Plug 'PProvost/vim-ps1'
   "Plug 'fatih/vim-go'
   call plug#end()

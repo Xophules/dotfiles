@@ -1,11 +1,19 @@
 #!/bin/bash
 
-echo Aliases Set!
+unalias -a
 
+alias dot='cd $DOTFILES'
+alias scripts='cd $SCRIPTS'
+alias snippets='cd $SNIPPETS'
+
+alias free='free -h'
+alias df='df -h'
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias k='kubectl'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

@@ -10,6 +10,12 @@ esac
 # --------------- envionment variables ---------------
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export REPOS="$HOME/repos"
+export GITUSER="xophules"
+export GHREPOS="$REPOS/github/$GITUSER"
+export DOTFILES="$GHREPOS/dotfiles"
+export SCRIPTS="$DOTFILES/scripts"
+export SNIPPETS="$DOTFILES/scnippets"
 
 # --------------- history --------------- 
 # don't put duplicate lines or lines starting with space in the history.
@@ -22,7 +28,6 @@ HISTFILESIZE=10000
 set -o vi
 # append to the history file, don't overwrite it
 shopt -s histappend
-
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -98,4 +103,21 @@ if ! shopt -oq posix; then
 fi
 
 #---Changes made here forth---
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 export PATH="$HOME/.emacs.d/bin:$PATH"
+. "$HOME/.cargo/env"
