@@ -1,6 +1,7 @@
 #!/bin/bash
 
 unalias -a
+# echo Aliases Set!
 
 alias dot='cd $DOTFILES'
 alias scripts='cd $SCRIPTS'

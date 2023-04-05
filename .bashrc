@@ -7,6 +7,10 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+
+#---Changes made here forth---
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
 # --------------- envionment variables ---------------
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -16,14 +20,26 @@ export GHREPOS="$REPOS/github/$GITUSER"
 export DOTFILES="$GHREPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export SNIPPETS="$DOTFILES/scnippets"
+export NVIMRC="$HOME/.config/nvim/init.vim"
+
+# --- bash shell options ---
+shopt -s checkwinsize
+shopt -s expand_aliases
+shopt -s globstar
+shopt -s dotglob
+shopt -s extglob
+
+# --- stty annoyances ---
+stty stop undef #disable control-s accidental terminal stops
 
 # --------------- history --------------- 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
+HISTSIZE=5000
 HISTFILESIZE=10000
+
 # set vim as history editor
 set -o vi
 # append to the history file, don't overwrite it
@@ -82,14 +98,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -121,3 +129,13 @@ unset __conda_setup
 
 export PATH="$HOME/.emacs.d/bin:$PATH"
 . "$HOME/.cargo/env"
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
