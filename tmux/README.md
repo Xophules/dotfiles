@@ -1,4 +1,5 @@
 # TMUX Terminal Multiplexer Configuration
+Not my words ... yet 
 
 TMUX is the most powerful multiplexer on the planet. But one of the most
 annoying things about it is that rather than choose backward-compatible
@@ -40,3 +41,10 @@ scenario.
 Remember to `unset TMUX` to allow starting the nested TMUX session. To
 make it easier [`tmuxin`](../scripts/tmuxin) can be used instead of
 `tmux`.
+
+## Further consideration for configuration
+After reading some of the man pages for tmux it seems there's a lot of overlap
+to vim with the possibility of modal operations.
+[tmux-modal](https://github.com/whame/tmux-modal)
+[tmux Plugins](https://github.com/tmux-plugins/tpm)
+
