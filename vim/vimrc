@@ -110,17 +110,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
+set statusline=
+
 " only load plugins if Plug detected
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
   Plug 'https://github.com/sainnhe/everforest'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'rickhowe/diffchar.vim'
+
+  " Plug 'itchyny/lightline.vim'
+  " Plug 'albertomontesg/lightline-asyncrun' " Integration of https://github.com/skywind3000/asyncrun.vim
+  Plug 'luochen1990/rainbow'
   Plug 'universal-ctags/ctags'
   Plug 'preservim/tagbar'
-  Plug 'luochen1990/rainbow'
-  Plug 'itchyny/lightline.vim'
-  Plug 'albertomontesg/lightline-asyncrun' " Integration of https://github.com/skywind3000/asyncrun.vim
   Plug 'sainnhe/artify.vim'
   Plug 'rmolin88/pomodoro.vim'
   Plug 'ryanoasis/vim-devicons'
@@ -167,7 +172,7 @@ let g:everforest_transparent_background = 2
 let g:everforest_spell_foreground = 'colored'
 let g:everforest_ui_contrast = 'high'
 
-let g:everforest_diagnostic_text_highlight = 0
+let g:everforest_diagnostic_text_highlight = 1
 let g:everforest_diagnostic_line_highlight = 'colored'
 let g:everforest_diagnostic_virtual_text = 0
 

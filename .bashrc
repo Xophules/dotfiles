@@ -15,7 +15,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export REPOS="$HOME/repos"
-export GITUSER="xophules"
+export GITUSER="nfroseth"
 export GHREPOS="$REPOS/github/$GITUSER"
 export DOTFILES="$GHREPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
@@ -35,15 +35,17 @@ stty stop undef #disable control-s accidental terminal stops
 # --------------- history --------------- 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoredups:erasedups # Ubuntu default is ignoreboth
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=10000
+HISTSIZE=1000000
+HISTFILESIZE=10000000
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# append to the history file, don't overwrite it
+shopt -s histappend
 
 # set vim as history editor
 set -o vi
-# append to the history file, don't overwrite it
-shopt -s histappend
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -52,6 +54,9 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
+
+XDG_RUNTIME_DIR=/tmp/run/user/$(id -u)
+mkdir -p XDG_RUNTIME_DIR
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -138,4 +143,24 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_work ]; then
+    . ~/.bash_work 
+fi
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f "/home/xoph/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/xoph/.config/fabric/fabric-bootstrap.inc"; fi
+
+# fnm
+FNM_PATH="/home/xoph/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
+# pnpm
+export PNPM_HOME="/home/xoph/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

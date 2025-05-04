@@ -15,7 +15,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias k='kubectl'
+alias kubectl='microk8s kubectl'
+
+alias k='microk8s kubectl'
+alias m='microk8s'
+alias gs='git status'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
