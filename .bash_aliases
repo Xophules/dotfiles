@@ -14,12 +14,17 @@ alias df='df -h'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias gs="git status"
+alias ga="git add . -A"
+alias gc="git commit -m"
+alias gd="git diff"
 
-alias kubectl='microk8s kubectl'
+alias bashr="source ~/.bashrc"
 
-alias k='microk8s kubectl'
+alias k='kubectl'
+#alias kubectl='microk8s kubectl'
+alias mk='microk8s kubectl'
 alias m='microk8s'
-alias gs='git status'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

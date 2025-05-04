@@ -110,22 +110,19 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-set statusline=
-
+" set statusline=
 " only load plugins if Plug detected
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
+  Plug 'leafOfTree/vim-svelte-plugin'
+  Plug 'yuezk/vim-js'
+  Plug 'maxmellon/vim-jsx-pretty'
   Plug 'https://github.com/sainnhe/everforest'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'skywind3000/asyncrun.vim'
-  Plug 'rickhowe/diffchar.vim'
-
-  " Plug 'itchyny/lightline.vim'
-  " Plug 'albertomontesg/lightline-asyncrun' " Integration of https://github.com/skywind3000/asyncrun.vim
-  Plug 'luochen1990/rainbow'
   Plug 'universal-ctags/ctags'
   Plug 'preservim/tagbar'
+  Plug 'luochen1990/rainbow'
   Plug 'sainnhe/artify.vim'
   Plug 'rmolin88/pomodoro.vim'
   Plug 'ryanoasis/vim-devicons'

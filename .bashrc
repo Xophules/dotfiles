@@ -15,9 +15,9 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export REPOS="$HOME/repos"
-export GITUSER="nfroseth"
+export GITUSER="xophules"
 export GHREPOS="$REPOS/github/$GITUSER"
-export DOTFILES="$GHREPOS/dotfiles"
+export DOT="$GHREPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export SNIPPETS="$DOTFILES/scnippets"
 export NVIMRC="$HOME/.config/nvim/init.vim"
@@ -40,12 +40,12 @@ HISTCONTROL=ignoredups:erasedups # Ubuntu default is ignoreboth
 HISTSIZE=1000000
 HISTFILESIZE=10000000
 # After each command, append to the history file and reread it
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-# append to the history file, don't overwrite it
-shopt -s histappend
+# PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # set vim as history editor
 set -o vi
+# append to the history file, don't overwrite it
+shopt -s histappend
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -147,6 +147,10 @@ if [ -f ~/.bash_work ]; then
     . ~/.bash_work 
 fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 if [ -f "/home/xoph/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/xoph/.config/fabric/fabric-bootstrap.inc"; fi
 
@@ -164,3 +168,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+#. "$HOME/.local/bin/env"
